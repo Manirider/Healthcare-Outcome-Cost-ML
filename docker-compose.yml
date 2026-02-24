@@ -1,0 +1,16 @@
+version: '3.8'
+
+services:
+  app:
+    build: .
+    container_name: healthcare-analysis-dashboard
+    ports:
+      - "8501:8501"
+    volumes:
+      - ./src:/app/src
+      - ./outputs:/app/outputs
+      - ./app.py:/app/app.py
+      - ./data:/app/data
+    environment:
+      - PYTHONUNBUFFERED=1
+    restart: unless-stopped

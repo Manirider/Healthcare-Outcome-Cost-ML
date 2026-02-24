@@ -1,0 +1,46 @@
+{
+  "xgboost": {
+    "n_estimators": 401,
+    "max_depth": 6,
+    "learning_rate": 0.034152572417886835,
+    "subsample": 0.8369993090060779,
+    "colsample_bytree": 0.5123526693065024,
+    "min_child_weight": 9,
+    "reg_alpha": 3.509406001407834,
+    "reg_lambda": 0.05043710774472841,
+    "random_state": 42,
+    "eval_metric": "logloss",
+    "use_label_encoder": false,
+    "verbosity": 0
+  },
+  "lightgbm": {
+    "n_estimators": 313,
+    "max_depth": 3,
+    "learning_rate": 0.1024932221692416,
+    "subsample": 0.7760609974958406,
+    "colsample_bytree": 0.5610191174223894,
+    "min_child_samples": 27,
+    "reg_alpha": 2.039373116525212e-08,
+    "reg_lambda": 1.527156759251193,
+    "num_leaves": 44,
+    "random_state": 42,
+    "verbose": -1
+  },
+  "logistic": {
+    "C": 2.465832945854912,
+    "penalty": "l2",
+    "solver": "lbfgs",
+    "max_iter": 2000,
+    "random_state": 42
+  },
+  "mlp": {
+    "hidden_layer_sizes": "(116, 123)",
+    "activation": "relu",
+    "alpha": "4.207988669606632e-05",
+    "learning_rate_init": "0.00020511104188433984",
+    "max_iter": "500",
+    "early_stopping": "True",
+    "random_state": "42"
+  },
+  "best_model": "LogReg"
+}

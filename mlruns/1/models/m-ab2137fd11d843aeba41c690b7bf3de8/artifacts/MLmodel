@@ -1,0 +1,23 @@
+artifact_path: file:C:/Users/Anonymous/Downloads/healthcare-outcome-analysis/mlruns/1/models/m-ab2137fd11d843aeba41c690b7bf3de8/artifacts
+flavors:
+  python_function:
+    env:
+      conda: conda.yaml
+      virtualenv: python_env.yaml
+    loader_module: mlflow.sklearn
+    model_path: model.pkl
+    predict_fn: predict
+    python_version: 3.14.0
+  sklearn:
+    code: null
+    pickled_model: model.pkl
+    serialization_format: cloudpickle
+    sklearn_version: 1.8.0
+    skops_trusted_types: null
+mlflow_version: 3.10.0
+model_id: m-ab2137fd11d843aeba41c690b7bf3de8
+model_size_bytes: 570804
+model_uuid: m-ab2137fd11d843aeba41c690b7bf3de8
+prompts: null
+run_id: 3e74a6431a0045348665393bc724f61b
+utc_time_created: '2026-02-23 21:53:31.832122'
