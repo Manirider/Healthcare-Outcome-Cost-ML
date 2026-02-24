@@ -137,7 +137,7 @@ def add_executive_summary(story, styles):
     good outcomes with standard care. This precision medicine approach simultaneously improves
     outcomes and reduces waste.
     """
-    story.append(Paragraph(text, styles["BodyText2"]))
+    story.append(Paragraph(summary_text, styles["BodyText2"]))
     story.append(PageBreak())
 
 def add_methods_section(story, styles):
@@ -280,60 +280,57 @@ def add_cost_section(story, styles):
         styles["BodyText2"]
     ))
 
-       styles["BodyText2"]
-    ))
-
-        for fig_name, caption in [("nmb_curves.png", "NMB Acceptability Curves"),
+    for fig_name, caption in [("nmb_curves.png", "NMB Acceptability Curves"),
                               ("tornado_sensitivity.png", "Tornado Sensitivity")]:
-    fig_path = os.path.join(FIGURES_DIR, fig_name)
+        fig_path = os.path.join(FIGURES_DIR, fig_name)
         if os.path.exists(fig_path):
-    story.append(Spacer(1, 0.2*inch))
+            story.append(Spacer(1, 0.2*inch))
             img = Image(fig_path, width=5.5*inch, height=3*inch)
             story.append(img)
             story.append(Paragraph(f"<i>{caption}</i>", styles["BodyText2"]))
 
-        story.append(PageBreak())
+    story.append(PageBreak())
 
-    def add_recommendations(story, styles):
+def add_recommendations(story, styles):
 
     story.append(Paragraph("6. Actionable Recommendations",
-                styles["SectionHeader"]))
+                 styles["SectionHeader"]))
 
-                 recs = [
+    recs = [
         ("<b>Implement risk stratification at point of care.</b> Deploy the predictive model "
          "to identify patients in the top risk quartile at treatment initiation. Expected "
          "outcome improvement: 15-20% in targeted subgroup (95% CI: 10-25%).", "HIGH"),
-         ("<b>Target enhanced treatment to high-risk patients.</b> Reserve enhanced protocols "
+        ("<b>Target enhanced treatment to high-risk patients.</b> Reserve enhanced protocols "
          "for patients with predicted success probability < 0.40. This concentrates resources "
          "where marginal benefit is greatest, improving NMB by estimated $4,000-8,000/patient.", "HIGH"),
-         ("<b>Prioritize glycemic control and exercise promotion.</b> HbA1c and exercise frequency "
+        ("<b>Prioritize glycemic control and exercise promotion.</b> HbA1c and exercise frequency "
          "are modifiable risk factors with the highest SHAP importance. Pre-treatment optimization "
          "of these factors could shift patients from high to moderate risk categories.", "MEDIUM"),
-         ("<b>Monitor metabolic syndrome score for treatment escalation.</b> The metabolic syndrome "
+        ("<b>Monitor metabolic syndrome score for treatment escalation.</b> The metabolic syndrome "
          "score (0-5) provides a simple bedside metric for ongoing risk assessment. Patients "
          "scoring 3+ should trigger clinical review for treatment intensification.", "MEDIUM"),
-         ("<b>Conduct prospective validation study.</b> Before full deployment, validate the model "
+        ("<b>Conduct prospective validation study.</b> Before full deployment, validate the model "
          "on a prospective cohort of 500-1,000 patients over 12 months to confirm calibration "
          "and discrimination in real-world conditions.", "HIGH"),
-         ]
+    ]
 
-         for i, (text, priority) in enumerate(recs, 1):
-         color = "#e74c3c" if priority == "HIGH" else "#f39c12"
-         story.append(Paragraph(
-           f'<font color="{color}">[{priority}]</font> {i}. {text}',
+    for i, (text, priority) in enumerate(recs, 1):
+        color = "#e74c3c" if priority == "HIGH" else "#f39c12"
+        story.append(Paragraph(
+            f'<font color="{color}">[{priority}]</font> {i}. {text}',
             styles["BodyText2"]
         ))
-            story.append(Spacer(1, 0.1*inch))
+        story.append(Spacer(1, 0.1*inch))
 
-        story.append(PageBreak())
+    story.append(PageBreak())
 
-        def add_limitations(story, styles):
+def add_limitations(story, styles):
 
-        story.append(Paragraph("7. Limitations and Next Steps",
-                styles["SectionHeader"]))
+    story.append(Paragraph("7. Limitations and Next Steps",
+                 styles["SectionHeader"]))
 
-                 story.append(Paragraph("7.1 Limitations", styles["SubSection"]))
-                 limitations = [
+    story.append(Paragraph("7.1 Limitations", styles["SubSection"]))
+    limitations = [
         "Synthetic data: All results are based on synthetic data with known generating mechanisms. "
         "Real-world performance may differ due to unmeasured confounders, selection bias, and "
         "distributional differences.",
@@ -345,25 +342,25 @@ def add_cost_section(story, styles):
         "different healthcare settings, populations, or time periods.",
         "Causal inference: Feature importance reflects predictive association, not causation. "
         "Interventions based on modifiable risk factors require randomized controlled trial evidence."
-                     ]
+    ]
 
-                     for lim in limitations:
+    for lim in limitations:
         story.append(Paragraph(f"  - {lim}", styles["BodyText2"]))
 
-                     story.append(Paragraph("7.2 Recommended Next Steps", styles["SubSection"]))
-                     next_steps = [
+    story.append(Paragraph("7.2 Recommended Next Steps", styles["SubSection"]))
+    next_steps = [
         "Prospective validation on real clinical data (target: N >= 1,000, multi-site)",
         "Integration with EHR systems for real-time risk scoring at point of care",
         "A/B testing of model-guided vs. standard treatment selection",
         "Expansion to include additional biomarkers (troponin, BNP, CRP)",
         "Development of time-series extension for longitudinal risk monitoring",
         "Health equity audit: ensure model performance is equitable across demographic groups"
-                     ]
+    ]
 
-                     for step in next_steps:
+    for step in next_steps:
         story.append(Paragraph(f"  - {step}", styles["BodyText2"]))
 
-                     def main():
+def main():
 
     logger.info("="*60)
     logger.info("GENERATING EXECUTIVE SUMMARY PDF")
@@ -378,29 +375,23 @@ def add_cost_section(story, styles):
         leftMargin=0.75*inch,
         topMargin=0.75*inch,
         bottomMargin=0.75*inch
-)
-
-    styles = build_styles()
-    story = []
+    )
 
     styles = build_styles()
     story = []
 
     add_cover_page(story, styles)
     add_executive_summary(story, styles)
-    add_problem_section(story, styles)
     add_methods_section(story, styles)
     add_findings_section(story, styles)
     add_cost_section(story, styles)
     add_recommendations(story, styles)
     add_limitations(story, styles)
 
-    add_limitations(story, styles)
-
     doc.build(story)
     logger.info(f"\nExecutive summary saved to: {output_path}")
     logger.info("="*60)
 
-                     if __name__ == "__main__":
+if __name__ == "__main__":
     main()
 

@@ -53,7 +53,7 @@ def create_pdf():
     The analysis below shows the Net Monetary Benefit (NMB) curves. The model-guided strategy (Green Line) consistently
     outperforms standard protocols across all reasonable Willingness-to-Pay thresholds.
     """
-    story.append(Paragraph(ce_text, styles['Normal']))
+    story.append(Paragraph(intro_text, styles['Normal']))
 
     nmb_path = os.path.join(FIGURES_DIR, "nmb_curves.png")
     if os.path.exists(nmb_path):

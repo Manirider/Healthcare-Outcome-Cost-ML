@@ -41,7 +41,10 @@ st.markdown("""
         text-align: center;
     }
 </style>
+""")
 
+@st.cache_resource
+def load_resources():
     try:
         pipeline = joblib.load(os.path.join(MODELS_DIR, "best_model.pkl"))
     except:
