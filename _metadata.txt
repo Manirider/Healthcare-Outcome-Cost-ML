@@ -1,0 +1,8 @@
+Repository: Healthcare-Outcome-Cost-ML
+Description: Portfolio project repository.
+Topics: portfolio-project
+
+GitHub Settings Updates:
+1. Go to https://github.com/Manirider/Healthcare-Outcome-Cost-ML/settings
+2. Update the Description field to: Portfolio project repository.
+3. Add the following tags under Topics: portfolio-project
